@@ -1,0 +1,15 @@
+package employeedetails;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class employeedetails {
+    public static void main(String[] args) throws NumberFormatException, IOException {
+
+        // CSV file path for employee details
+        String inputFile1 = "C:\\Users\\USER\\Downloads\\Payroll System.csv\\Details Hourly Rate.csv";
+        String line;
+        
+        System.out.println("Employee Details: " + Arrays.toString(employeeDetails));

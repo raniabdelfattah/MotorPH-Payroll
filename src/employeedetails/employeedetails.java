@@ -63,7 +63,6 @@ public class employeedetails {
                             System.out.println("Status                     : " + employeeStatus);
                             System.out.println("Position                   : " + employeePosition);
                             System.out.println("Immediate Supervisor       : " + employeeSupervisor);
-                            System.out.println("------------------");
                             break;
                         }
                     }

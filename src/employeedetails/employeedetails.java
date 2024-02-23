@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class employeedetails {
     public static void main(String[] args) throws NumberFormatException, IOException {
 
-        // CSV file path for employee details
+        // CSV file path for employee and payroll details
         String EmployeeDetails = "C:\\Users\\USER\\Downloads\\Group 11 Official File - Employee Details.csv";
         String HoursWorkedMonthly = "C:\\Users\\USER\\Downloads\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited).csv";
         String HourlyRate = "C:\\Users\\USER\\Downloads\\Group 11 Official File - Hourly Rate.csv";

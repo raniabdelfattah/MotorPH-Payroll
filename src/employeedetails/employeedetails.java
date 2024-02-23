@@ -9,12 +9,15 @@ import java.util.Scanner;
 public class employeedetails {
     public static void main(String[] args) throws NumberFormatException, IOException {
 
-        // CSV file path for employee and payroll details
+        // CSV file path for employee details
         String EmployeeDetails = "C:\\Users\\USER\\Downloads\\Group 11 Official File - Employee Details.csv";
         String HoursWorkedMonthly = "C:\\Users\\USER\\Downloads\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited).csv";
         String HourlyRate = "C:\\Users\\USER\\Downloads\\Group 11 Official File - Hourly Rate.csv";
         String GrossWage = "C:\\Users\\USER\\Downloads\\MotorPH Overall Employee Data_Helena's Copy - Gross Salary.csv";
         String SSS = "C:\\Users\\USER\\Downloads\\SSS Contribution  - SSS .csv";
+        String PagIbig = "C:\\Users\\USER\\Downloads\\Group 11 Official File - PAG-IBIG.csv";
+        String PhilHealth = "C:\\Users\\USER\\Downloads\\Group 11 Official File - PHILHEALTH.csv";
+        String WithholdingTax = "C:\\Users\\USER\\Downloads\\Group 11 Official File - WITHHOLDING TAX.csv";
         String line;
 
         // enter employee ID prompt
@@ -53,7 +56,10 @@ public class employeedetails {
                             String employeePhoneNumber = employeeDetails[4].trim();
                             String employeeStatus = employeeDetails[5].trim();
                             String employeePosition = employeeDetails[6].trim();
-                            String employeeSupervisor = employeeDetails[7] + " " + employeeDetails[8].trim();
+                            String employeeSupervisor = "N/A";
+                            if (employeeDetails.length >= 9) {
+                                employeeSupervisor = employeeDetails[7] + " " + employeeDetails[8].trim();
+                            } //"N/A" result on console if employee has no immediate supervisor. [7] and [8] are there to bypass the commas of supervisors first and last name.
 
                             System.out.println("----------Employee Details----------");
                             System.out.println("Employee Last Name         : " + employeeLastName);
@@ -80,7 +86,7 @@ public class employeedetails {
                 System.out.print("Enter the Month: ");
                 String enteredMonth = scanner.nextLine();
 
-                // read monthly hours worked from HoursWorkedMonthly csv file
+                // read monthly hours worked from HoursWorkedMonthly file
                 BufferedReader monthlyHoursReader = null;
                 try {
                     monthlyHoursReader = new BufferedReader(new FileReader(HoursWorkedMonthly));
@@ -110,7 +116,7 @@ public class employeedetails {
                             System.out.println("----------Payroll Details----------");
                             System.out.println("Hours Worked in " + enteredMonth + ": " + row[monthIndex].trim());
 
-                            // read hourly rate from HourlyRate csv file
+                            // read hourly rate from HourlyRate file
                             BufferedReader hourlyRateReader = null;
                             try {
                                 hourlyRateReader = new BufferedReader(new FileReader(HourlyRate));
@@ -144,7 +150,7 @@ public class employeedetails {
                                 }
                             }
 
-                            // read gross wage from GrossWage csv file
+                            // read gross wage from GrossWage file
                             BufferedReader grossWageReader = null;
                             try {
                                 grossWageReader = new BufferedReader(new FileReader(GrossWage));
@@ -209,10 +215,106 @@ public class employeedetails {
                                     }
                                 }
                             }
+                         // read Pag-IBIG contribution from Pagibig file
+                            BufferedReader pagibigReader = null;
+                            try {
+                                pagibigReader = new BufferedReader(new FileReader(PagIbig));
+                                // skip the header line
+                                pagibigReader.readLine();
+
+                                String pagibigLine;
+                                while ((pagibigLine = pagibigReader.readLine()) != null) {
+                                    String[] pagibigRow = pagibigLine.split(",");
+                                    int currentEmployeeIDPagibig = Integer.parseInt(pagibigRow[0].trim());
+
+                                    if (currentEmployeeIDPagibig == employeeID) {
+                                        // display Pag-IBIG contribution for the entered month
+                                        double pagibigValue = Double.parseDouble(pagibigRow[monthIndex].trim());
+                                        System.out.println("Pag-IBIG Contribution in " + enteredMonth + ": " + pagibigValue);
+                                        break;
+                                    }
+                                }
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (pagibigReader != null) {
+                                    try {
+                                        pagibigReader.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                         // read PhilHealth contribution from PhilHealth file
+                            BufferedReader philhealthReader = null;
+                            try {
+                                philhealthReader = new BufferedReader(new FileReader(PhilHealth));
+                                // skip the header line
+                                philhealthReader.readLine();
+
+                                String philhealthLine;
+                                while ((philhealthLine = philhealthReader.readLine()) != null) {
+                                    String[] philhealthRow = philhealthLine.split(",");
+                                    int currentEmployeeIDPhilhealth = Integer.parseInt(philhealthRow[0].trim());
+
+                                    if (currentEmployeeIDPhilhealth == employeeID) {
+                                        // display PhilHealth contribution for the entered month
+                                        double philhealthValue = Double.parseDouble(philhealthRow[monthIndex].trim());
+                                        System.out.println("PhilHealth Contribution in " + enteredMonth + ": " + philhealthValue);
+                                        break;
+                                    }
+                                }
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (philhealthReader != null) {
+                                    try {
+                                        philhealthReader.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                            // read Withholding Tax from WithholdingTax file
+                            BufferedReader withholdingTaxReader = null;
+                            try {
+                                withholdingTaxReader = new BufferedReader(new FileReader(WithholdingTax));
+                                // skip the header line
+                                withholdingTaxReader.readLine();
+
+                                String withholdingTaxLine;
+                                while ((withholdingTaxLine = withholdingTaxReader.readLine()) != null) {
+                                    String[] withholdingTaxRow = withholdingTaxLine.split(",");
+                                    int currentEmployeeIDWithholdingTax = Integer.parseInt(withholdingTaxRow[0].trim());
+
+                                    if (currentEmployeeIDWithholdingTax == employeeID) {
+                                        // display Withholding Tax for the entered month
+                                        double withholdingTaxValue = Double.parseDouble(withholdingTaxRow[monthIndex].trim());
+                                        System.out.println("Withholding Tax in " + enteredMonth + ": " + withholdingTaxValue);
+                                        break;
+                                    }
+                                }
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (withholdingTaxReader != null) {
+                                    try {
+                                        withholdingTaxReader.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
                             break;
                         }
-                    }                
-                    }catch (FileNotFoundException e) {
+                    }
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -55,6 +55,7 @@ public class employeedetails {
                             String employeePosition = employeeDetails[6].trim();
                             String employeeSupervisor = employeeDetails[7] + " " + employeeDetails[8].trim();
 
+                            System.out.println("----------Employee Details----------");
                             System.out.println("Employee Last Name         : " + employeeLastName);
                             System.out.println("Employee First Name        : " + employeeFirstName);
                             System.out.println("Birthday                   : " + employeeBirthday);
@@ -80,7 +81,7 @@ public class employeedetails {
                 System.out.print("Enter the Month: ");
                 String enteredMonth = scanner.nextLine();
 
-                // read monthly hours worked from HoursWorkedMonthly file
+                // read monthly hours worked from HoursWorkedMonthly csv file
                 BufferedReader monthlyHoursReader = null;
                 try {
                     monthlyHoursReader = new BufferedReader(new FileReader(HoursWorkedMonthly));
@@ -107,9 +108,10 @@ public class employeedetails {
                         if (currentEmployeeID == employeeID) {
                             foundEmployeeID = true;
                             // display hours worked for the entered month
+                            System.out.println("----------Payroll Details----------");
                             System.out.println("Hours Worked in " + enteredMonth + ": " + row[monthIndex].trim());
 
-                            // read hourly rate from HourlyRate file
+                            // read hourly rate from HourlyRate csv file
                             BufferedReader hourlyRateReader = null;
                             try {
                                 hourlyRateReader = new BufferedReader(new FileReader(HourlyRate));
@@ -143,7 +145,7 @@ public class employeedetails {
                                 }
                             }
 
-                            // read gross wage from GrossWage file
+                            // read gross wage from GrossWage csv file
                             BufferedReader grossWageReader = null;
                             try {
                                 grossWageReader = new BufferedReader(new FileReader(GrossWage));
@@ -210,7 +212,6 @@ public class employeedetails {
                             }
                             break;
                         }
-                
                     }                
                     }catch (FileNotFoundException e) {
                     e.printStackTrace();

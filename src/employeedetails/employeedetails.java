@@ -9,21 +9,24 @@ import java.util.Scanner;
 public class employeedetails {
     public static void main(String[] args) throws NumberFormatException, IOException {
 
-        // CSV file path for employee details
-        String EmployeeDetails = "C:\\Users\\USER\\Downloads\\Group 11 Official File - Employee Details.csv";
-        String HoursWorkedMonthly = "C:\\Users\\USER\\Downloads\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited).csv";
-        String HourlyRate = "C:\\Users\\USER\\Downloads\\Group 11 Official File - Hourly Rate.csv";
-        String GrossWage = "C:\\Users\\USER\\Downloads\\MotorPH Overall Employee Data_Helena's Copy - Gross Salary.csv";
-        String SSS = "C:\\Users\\USER\\Downloads\\SSS Contribution  - SSS .csv";
-        String PagIbig = "C:\\Users\\USER\\Downloads\\Group 11 Official File - PAG-IBIG.csv";
-        String PhilHealth = "C:\\Users\\USER\\Downloads\\Group 11 Official File - PHILHEALTH.csv";
-        String WithholdingTax = "C:\\Users\\USER\\Downloads\\Group 11 Official File - WITHHOLDING TAX.csv";
+        // CSV file paths
+        String EmployeeDetails = "src\\MotorPH Overall Employee Data_Helena's Copy - Employee Details (rev).csv";
+        String HoursWorkedMonthly = "src\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited) (1).csv";
+        String HourlyRate = "src\\Group 11 Official File - Hourly Rate.csv";
+        String GrossWage = "src\\MotorPH Overall Employee Data_Helena's Copy - Gross Salary.csv";
+        String SSS = "src\\SSS Contribution  - SSS .csv";
+        String PagIbig = "src\\Group 11 Official File - PAG-IBIG.csv";
+        String PhilHealth = "src\\Group 11 Official File - PHILHEALTH.csv";
+        String WithholdingTax = "src\\Group 11 Official File - WITHHOLDING TAX.csv";
+        String LateDeductions = "src\\MotorPH Overall Employee Data_Helena's Copy - LATE DEDUCTION.csv";
+        String Allowances = "src\\MotorPH Overall Employee Data_Helena's Copy - Allowances.csv";
+        String NetWage = "src\\MotorPH Overall Employee Data_Helena's Copy - NET PAY.csv"; 
         String line;
 
         // enter employee ID prompt
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                System.out.print("Enter Employee ID (or type 'exit' to stop): ");
+                System.out.print("\nEnter Employee ID (or type 'exit' to stop): ");
                 String userInput = scanner.nextLine();
 
                 // exit prompt
@@ -32,7 +35,13 @@ public class employeedetails {
                     break;
                 }
 
-                int employeeID = Integer.parseInt(userInput);
+                int employeeID;
+                try {
+                    employeeID = Integer.parseInt(userInput);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid Employee ID.");
+                    continue;
+                }
 
                 // read employee details from EmployeeDetails
                 boolean foundEmployeeID = false;
@@ -61,8 +70,8 @@ public class employeedetails {
                                 employeeSupervisor = employeeDetails[7] + " " + employeeDetails[8].trim();
                             } //"N/A" result on console if employee has no immediate supervisor. [7] and [8] are there to bypass the commas of supervisors first and last name.
 
-                            System.out.println("----------Employee Details----------");
-                            System.out.println("Employee Last Name         : " + employeeLastName);
+                            System.out.println("\n----------Employee Details----------");
+                            System.out.println("\nEmployee Last Name         : " + employeeLastName);
                             System.out.println("Employee First Name        : " + employeeFirstName);
                             System.out.println("Birthday                   : " + employeeBirthday);
                             System.out.println("Phone Number               : " + employeePhoneNumber);
@@ -73,8 +82,10 @@ public class employeedetails {
                         }
                     }
                 } catch (FileNotFoundException e) {
+                    System.out.println("Error: Employee details file not found.");
                     e.printStackTrace();
                 } catch (IOException e) {
+                    System.out.println("Error reading employee details.");
                     e.printStackTrace();
                 }
 
@@ -83,7 +94,7 @@ public class employeedetails {
                     continue;
                 }
                 // prompt for month
-                System.out.print("Enter the Month: ");
+                System.out.print("\nEnter the Month: ");
                 String enteredMonth = scanner.nextLine();
 
                 // read monthly hours worked from HoursWorkedMonthly file
@@ -113,14 +124,11 @@ public class employeedetails {
                         if (currentEmployeeID == employeeID) {
                             foundEmployeeID = true;
                             // display hours worked for the entered month
-                            System.out.println("----------Payroll Details----------");
-                            System.out.println("Hours Worked in " + enteredMonth + ": " + row[monthIndex].trim());
+                            System.out.println("\n----------Payroll Details----------");
+                            System.out.println("\nHours Worked in " + enteredMonth + ": " + row[monthIndex].trim());
 
                             // read hourly rate from HourlyRate file
-                            BufferedReader hourlyRateReader = null;
-                            try {
-                                hourlyRateReader = new BufferedReader(new FileReader(HourlyRate));
-
+                            try (BufferedReader hourlyRateReader = new BufferedReader(new FileReader(HourlyRate))) {
                                 // skip the header line
                                 hourlyRateReader.readLine();
 
@@ -137,23 +145,15 @@ public class employeedetails {
                                     }
                                 }
                             } catch (FileNotFoundException e) {
+                                System.out.println("Error: Hourly rate file not found.");
                                 e.printStackTrace();
                             } catch (IOException e) {
+                                System.out.println("Error reading hourly rate.");
                                 e.printStackTrace();
-                            } finally {
-                                if (hourlyRateReader != null) {
-                                    try {
-                                        hourlyRateReader.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
                             }
 
                             // read gross wage from GrossWage file
-                            BufferedReader grossWageReader = null;
-                            try {
-                                grossWageReader = new BufferedReader(new FileReader(GrossWage));
+                            try (BufferedReader grossWageReader = new BufferedReader(new FileReader(GrossWage))) {
                                 // skip the header line
                                 grossWageReader.readLine();
 
@@ -170,23 +170,15 @@ public class employeedetails {
                                     }
                                 }
                             } catch (FileNotFoundException e) {
+                                System.out.println("Error: Gross wage file not found.");
                                 e.printStackTrace();
                             } catch (IOException e) {
+                                System.out.println("Error reading gross wage.");
                                 e.printStackTrace();
-                            } finally {
-                                if (grossWageReader != null) {
-                                    try {
-                                        grossWageReader.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                    
-                                }
                             }
+
                             // read SSS contribution from SSS file
-                            BufferedReader sssReader = null;
-                            try {
-                                sssReader = new BufferedReader(new FileReader(SSS));
+                            try (BufferedReader sssReader = new BufferedReader(new FileReader(SSS))) {
                                 // skip the header line
                                 sssReader.readLine();
 
@@ -203,22 +195,15 @@ public class employeedetails {
                                     }
                                 }
                             } catch (FileNotFoundException e) {
+                                System.out.println("Error: SSS file not found.");
                                 e.printStackTrace();
                             } catch (IOException e) {
+                                System.out.println("Error reading SSS contribution.");
                                 e.printStackTrace();
-                            } finally {
-                                if (sssReader != null) {
-                                    try {
-                                        sssReader.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
                             }
-                         // read Pag-IBIG contribution from Pagibig file
-                            BufferedReader pagibigReader = null;
-                            try {
-                                pagibigReader = new BufferedReader(new FileReader(PagIbig));
+
+                            // read Pag-IBIG contribution from Pagibig file
+                            try (BufferedReader pagibigReader = new BufferedReader(new FileReader(PagIbig))) {
                                 // skip the header line
                                 pagibigReader.readLine();
 
@@ -235,22 +220,15 @@ public class employeedetails {
                                     }
                                 }
                             } catch (FileNotFoundException e) {
+                                System.out.println("Error: Pag-IBIG file not found.");
                                 e.printStackTrace();
                             } catch (IOException e) {
+                                System.out.println("Error reading Pag-IBIG contribution.");
                                 e.printStackTrace();
-                            } finally {
-                                if (pagibigReader != null) {
-                                    try {
-                                        pagibigReader.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
                             }
-                         // read PhilHealth contribution from PhilHealth file
-                            BufferedReader philhealthReader = null;
-                            try {
-                                philhealthReader = new BufferedReader(new FileReader(PhilHealth));
+
+                            // read PhilHealth contribution from PhilHealth file
+                            try (BufferedReader philhealthReader = new BufferedReader(new FileReader(PhilHealth))) {
                                 // skip the header line
                                 philhealthReader.readLine();
 
@@ -267,22 +245,36 @@ public class employeedetails {
                                     }
                                 }
                             } catch (FileNotFoundException e) {
+                                System.out.println("Error: PhilHealth file not found.");
                                 e.printStackTrace();
                             } catch (IOException e) {
+                                System.out.println("Error reading PhilHealth contribution.");
                                 e.printStackTrace();
-                            } finally {
-                                if (philhealthReader != null) {
-                                    try {
-                                        philhealthReader.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
+                            }
+
+                            // read Late Deductions from LateDeductions file
+                            try (BufferedReader lateDeductionsReader = new BufferedReader(new FileReader(LateDeductions))) {
+                                // Skip header
+                                lateDeductionsReader.readLine();
+                                String lateDeductionsLine;
+                                while ((lateDeductionsLine = lateDeductionsReader.readLine()) != null) {
+                                    String[] lateDeductionsRow = lateDeductionsLine.split(",");
+                                    int currentEmployeeIDLateDeductions = Integer.parseInt(lateDeductionsRow[0].trim());
+                                    if (currentEmployeeIDLateDeductions == employeeID) {
+                                        System.out.println("Late Deductions in " + enteredMonth + ": " + lateDeductionsRow[monthIndex].trim());
+                                        break;
                                     }
                                 }
+                            } catch (FileNotFoundException e) {
+                                System.out.println("Error: Late deductions file not found.");
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                System.out.println("Error reading late deductions.");
+                                e.printStackTrace();
                             }
+
                             // read Withholding Tax from WithholdingTax file
-                            BufferedReader withholdingTaxReader = null;
-                            try {
-                                withholdingTaxReader = new BufferedReader(new FileReader(WithholdingTax));
+                            try (BufferedReader withholdingTaxReader = new BufferedReader(new FileReader(WithholdingTax))) {
                                 // skip the header line
                                 withholdingTaxReader.readLine();
 
@@ -299,33 +291,70 @@ public class employeedetails {
                                     }
                                 }
                             } catch (FileNotFoundException e) {
+                                System.out.println("Error: Withholding tax file not found.");
                                 e.printStackTrace();
                             } catch (IOException e) {
+                                System.out.println("Error reading withholding tax.");
                                 e.printStackTrace();
-                            } finally {
-                                if (withholdingTaxReader != null) {
-                                    try {
-                                        withholdingTaxReader.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
+                            }
+
+                            // Read Net Wage from NetWage file
+                            try (BufferedReader netWageReader = new BufferedReader(new FileReader(NetWage))) {
+                                // skip the header line
+                                netWageReader.readLine();
+
+                                String netWageLine;
+                                while ((netWageLine = netWageReader.readLine()) != null) {
+                                    String[] netWageRow = netWageLine.split(",");
+                                    int currentEmployeeIDNetWage = Integer.parseInt(netWageRow[0].trim());
+
+                                    if (currentEmployeeIDNetWage == employeeID) {
+                                        // display Net Wage for the entered month
+                                        double netWageValue = Double.parseDouble(netWageRow[monthIndex].trim());
+                                        System.out.println("\nNet Wage in " + enteredMonth + ": " + netWageValue);
+                                        break;
                                     }
                                 }
+                            } catch (FileNotFoundException e) {
+                                System.out.println("Error: Net wage file not found.");
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                System.out.println("Error reading net wage.");
+                                e.printStackTrace();
                             }
+
+                            // Display Non-Taxable Income (Allowances)
+                            try (BufferedReader allowancesReader = new BufferedReader(new FileReader(Allowances))) {
+                                allowancesReader.readLine();
+                                String allowancesLine;
+                                while ((allowancesLine = allowancesReader.readLine()) != null) {
+                                    String[] allowancesRow = allowancesLine.split(",");
+                                    int currentEmployeeIDAllowances = Integer.parseInt(allowancesRow[0].trim());
+                                    if (currentEmployeeIDAllowances == employeeID) {
+                                        System.out.println("\n\nNon-Taxable Income (Allowances):");
+                                        System.out.println("Rice subsidy: " + allowancesRow[1].trim());
+                                        System.out.println("Phone allowance: " + allowancesRow[2].trim());
+                                        System.out.println("Clothing allowance: " + allowancesRow[3].trim());
+                                        break;
+                                    }
+                                }
+                            } catch (FileNotFoundException e) {
+                                System.out.println("Error: Allowances file not found.");
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                System.out.println("Error reading allowances.");
+                                e.printStackTrace();
+                            }
+
                             break;
                         }
                     }
                 } catch (FileNotFoundException e) {
+                    System.out.println("Error: Monthly hours worked file not found.");
                     e.printStackTrace();
                 } catch (IOException e) {
+                    System.out.println("Error reading monthly hours worked.");
                     e.printStackTrace();
-                } finally {
-                    if (monthlyHoursReader != null) {
-                        try {
-                            monthlyHoursReader.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
                 }
             }
         }

@@ -1,0 +1,12 @@
+// CSV file paths
+        String EmployeeDetails = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Employee Details (rev).csv";
+        String HoursWorkedMonthly = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited) (1).csv";
+        String HourlyRate = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - Hourly Rate.csv";
+        String GrossWage = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Gross Salary.csv";
+        String SSS = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - LATE DEDUCTION.csv";
+        String PagIbig = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - PAG-IBIG.csv";
+        String PhilHealth = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - PHILHEALTH.csv";
+        String WithholdingTax = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - WITHHOLDING TAX.csv";
+        String LateDeductions = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - LATE DEDUCTION.csv";
+        String Allowances = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Allowances.csv";
+        String NetWage = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - NET PAY.csv"; 

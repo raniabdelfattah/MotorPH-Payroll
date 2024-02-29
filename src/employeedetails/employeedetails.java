@@ -10,23 +10,23 @@ public class employeedetails {
     public static void main(String[] args) throws NumberFormatException, IOException {
 
         // CSV file paths
-        String EmployeeDetails = "src\\MotorPH Overall Employee Data_Helena's Copy - Employee Details (rev).csv";
-        String HoursWorkedMonthly = "src\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited) (1).csv";
-        String HourlyRate = "src\\Group 11 Official File - Hourly Rate.csv";
-        String GrossWage = "src\\MotorPH Overall Employee Data_Helena's Copy - Gross Salary.csv";
-        String SSS = "src\\SSS Contribution  - SSS .csv";
-        String PagIbig = "src\\Group 11 Official File - PAG-IBIG.csv";
-        String PhilHealth = "src\\Group 11 Official File - PHILHEALTH.csv";
-        String WithholdingTax = "src\\Group 11 Official File - WITHHOLDING TAX.csv";
-        String LateDeductions = "src\\MotorPH Overall Employee Data_Helena's Copy - LATE DEDUCTION.csv";
-        String Allowances = "src\\MotorPH Overall Employee Data_Helena's Copy - Allowances.csv";
-        String NetWage = "src\\MotorPH Overall Employee Data_Helena's Copy - NET PAY.csv"; 
+        String EmployeeDetails = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Employee Details (rev).csv";
+        String HoursWorkedMonthly = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Hours Worked Monthly (edited) (1).csv";
+        String HourlyRate = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - Hourly Rate.csv";
+        String GrossWage = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Gross Salary.csv";
+        String SSS = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - LATE DEDUCTION.csv";
+        String PagIbig = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - PAG-IBIG.csv";
+        String PhilHealth = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - PHILHEALTH.csv";
+        String WithholdingTax = "C:\\Users\\USER\\Downloads\\CPROG\\Group 11 Official File - WITHHOLDING TAX.csv";
+        String LateDeductions = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - LATE DEDUCTION.csv";
+        String Allowances = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - Allowances.csv";
+        String NetWage = "C:\\Users\\USER\\Downloads\\CPROG\\MotorPH Overall Employee Data_Helena's Copy - NET PAY.csv"; 
         String line;
 
         // enter employee ID prompt
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                System.out.print("\nEnter Employee ID (or type 'exit' to stop): ");
+                System.out.print("Enter Employee ID (or type 'exit' to stop): ");
                 String userInput = scanner.nextLine();
 
                 // exit prompt
@@ -125,7 +125,7 @@ public class employeedetails {
                             foundEmployeeID = true;
                             // display hours worked for the entered month
                             System.out.println("\n----------Payroll Details----------");
-                            System.out.println("\nHours Worked in " + enteredMonth + ": " + row[monthIndex].trim());
+                            System.out.println("\nHours Worked: " + row[monthIndex].trim());
 
                             // read hourly rate from HourlyRate file
                             try (BufferedReader hourlyRateReader = new BufferedReader(new FileReader(HourlyRate))) {
@@ -140,7 +140,7 @@ public class employeedetails {
                                     if (currentEmployeeIDHourlyRate == employeeID) {
                                         // display hourly rate
                                         double hourlyRateValue = Double.parseDouble(hourlyRateRow[3].trim()); 
-                                        System.out.println("Hourly Rate of Employee: " + hourlyRateValue);
+                                        System.out.println("Hourly Rate of Employee    : " + hourlyRateValue);
                                         break;
                                     }
                                 }
@@ -165,7 +165,7 @@ public class employeedetails {
                                     if (currentEmployeeIDGrossWage == employeeID) {
                                         // display gross wage for the entered month
                                         double grossWageValue = Double.parseDouble(grossWageRow[monthIndex].trim()); 
-                                        System.out.println("Gross Wage in " + enteredMonth + ": " + grossWageValue);
+                                        System.out.println("Gross Wage                 : " + grossWageValue);
                                         break;
                                     }
                                 }
@@ -190,7 +190,7 @@ public class employeedetails {
                                     if (currentEmployeeIDSSS == employeeID) {
                                         // display SSS contribution for the entered month
                                         double sssValue = Double.parseDouble(sssRow[monthIndex].trim()); 
-                                        System.out.println("SSS Contribution in " + enteredMonth + ": " + sssValue);
+                                        System.out.println("SSS Contribution           : " + sssValue);
                                         break;
                                     }
                                 }
@@ -215,7 +215,7 @@ public class employeedetails {
                                     if (currentEmployeeIDPagibig == employeeID) {
                                         // display Pag-IBIG contribution for the entered month
                                         double pagibigValue = Double.parseDouble(pagibigRow[monthIndex].trim());
-                                        System.out.println("Pag-IBIG Contribution in " + enteredMonth + ": " + pagibigValue);
+                                        System.out.println("Pag-IBIG Contribution      : " + pagibigValue);
                                         break;
                                     }
                                 }
@@ -240,7 +240,7 @@ public class employeedetails {
                                     if (currentEmployeeIDPhilhealth == employeeID) {
                                         // display PhilHealth contribution for the entered month
                                         double philhealthValue = Double.parseDouble(philhealthRow[monthIndex].trim());
-                                        System.out.println("PhilHealth Contribution in " + enteredMonth + ": " + philhealthValue);
+                                        System.out.println("PhilHealth Contribution    : " + philhealthValue);
                                         break;
                                     }
                                 }
@@ -261,7 +261,7 @@ public class employeedetails {
                                     String[] lateDeductionsRow = lateDeductionsLine.split(",");
                                     int currentEmployeeIDLateDeductions = Integer.parseInt(lateDeductionsRow[0].trim());
                                     if (currentEmployeeIDLateDeductions == employeeID) {
-                                        System.out.println("Late Deductions in " + enteredMonth + ": " + lateDeductionsRow[monthIndex].trim());
+                                        System.out.println("Late Deductions            : " + lateDeductionsRow[monthIndex].trim());
                                         break;
                                     }
                                 }
@@ -286,7 +286,7 @@ public class employeedetails {
                                     if (currentEmployeeIDWithholdingTax == employeeID) {
                                         // display Withholding Tax for the entered month
                                         double withholdingTaxValue = Double.parseDouble(withholdingTaxRow[monthIndex].trim());
-                                        System.out.println("Withholding Tax in " + enteredMonth + ": " + withholdingTaxValue);
+                                        System.out.println("Withholding Tax            : " + withholdingTaxValue);
                                         break;
                                     }
                                 }
@@ -311,7 +311,7 @@ public class employeedetails {
                                     if (currentEmployeeIDNetWage == employeeID) {
                                         // display Net Wage for the entered month
                                         double netWageValue = Double.parseDouble(netWageRow[monthIndex].trim());
-                                        System.out.println("\nNet Wage in " + enteredMonth + ": " + netWageValue);
+                                        System.out.println("\nNet Wage                   : " + netWageValue);
                                         break;
                                     }
                                 }
@@ -331,10 +331,10 @@ public class employeedetails {
                                     String[] allowancesRow = allowancesLine.split(",");
                                     int currentEmployeeIDAllowances = Integer.parseInt(allowancesRow[0].trim());
                                     if (currentEmployeeIDAllowances == employeeID) {
-                                        System.out.println("\n\nNon-Taxable Income (Allowances):");
-                                        System.out.println("Rice subsidy: " + allowancesRow[1].trim());
-                                        System.out.println("Phone allowance: " + allowancesRow[2].trim());
-                                        System.out.println("Clothing allowance: " + allowancesRow[3].trim());
+                                        System.out.println("\nNon-Taxable Income (Allowances)");
+                                        System.out.println("Rice subsidy               : " + allowancesRow[1].trim());
+                                        System.out.println("Phone allowance            : " + allowancesRow[2].trim());
+                                        System.out.println("Clothing allowance         : " + allowancesRow[3].trim());
                                         break;
                                     }
                                 }

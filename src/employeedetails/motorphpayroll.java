@@ -306,7 +306,7 @@ public class payrollsystem {
 			    double netPay = grossPay - sssContribution - pagIBIGContribution - philHealthContribution - withholdingTax - lateDeductions;
 
 			    // Print net pay
-			    System.out.println("\n------------Net Pay------------");
+			    System.out.println("\n--------------Net Pay--------------");
 			    System.out.println("\nNet Pay                    : PHP " + String.format("%.2f", netPay));
 
 			}

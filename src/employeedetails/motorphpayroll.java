@@ -41,14 +41,14 @@ public class payrollsystem {
 
 			    // Exit prompt
 			    if (userInput.equalsIgnoreCase("exit")) {
-			        System.out.println("Exiting the program.");
+			        System.out.println("\nExiting the program.");
 			        break;
 			    }
 
 			    try {
 			        employeeID = Integer.parseInt(userInput);
 			    } catch (NumberFormatException e) {
-			        System.out.println("Invalid input. Please enter a valid Employee ID.");
+			        System.out.println("\nInvalid input. Please enter a valid Employee ID.");
 			        continue;
 			    }
 
@@ -90,15 +90,15 @@ public class payrollsystem {
 			            }
 			        }
 			    } catch (FileNotFoundException e) {
-			        System.out.println("Error: Employee details file not found.");
+			        System.out.println("\nError: Employee details file not found.");
 			        e.printStackTrace();
 			    } catch (IOException e) {
-			        System.out.println("Error reading employee details.");
+			        System.out.println("\nError reading employee details.");
 			        e.printStackTrace();
 			    }
 
 			    if (!foundEmployeeID) {
-			        System.out.println("Employee ID not found.");
+			        System.out.println("\nEmployee ID not found.");
 			        continue;
 			    }
 
@@ -236,7 +236,7 @@ public class payrollsystem {
 			            // Check if the date matches the entered month and year
 			            if (monthYear.equals(enteredMonth)) {
 			                double lateHour = entry.getValue();
-			                System.out.println(date + " : " + String.format("%.2f", lateHour) + " hours late");
+			                System.out.println(date + "                 : " + String.format("%.2f", lateHour) + " hours late");
 			                totalLateHoursForMonth += lateHour;
 			            }
 			        }

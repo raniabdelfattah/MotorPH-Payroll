@@ -295,7 +295,7 @@ public class payrollsystem {
 			    // Calculate late deductions
 			    double lateDeductions = totalLateHoursForMonth * hourlyRate;
 			    
-			    System.out.println("\n----------Contributions----------");
+			    System.out.println("\n-----------Deductions-----------");
 			    System.out.println("\nSSS Contribution           : PHP " + String.format("%.2f", sssContribution));
 			    System.out.println("PhilHealth Contribution    : PHP " + String.format("%.2f", philHealthContribution));
 			    System.out.println("PagIBIG Contribution       : PHP " + String.format("%.2f", pagIBIGContribution));

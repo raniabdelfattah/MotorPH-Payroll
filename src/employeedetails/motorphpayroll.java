@@ -103,7 +103,7 @@ public class payrollsystem {
 			    }
 
 			    // Display employee details
-			    System.out.println("\n----------Employee Details----------");
+			    System.out.println("\n            EMPLOYEE DETAILS");
 			    System.out.println("\nEmployee Last Name         : " + employeeLastName);
 			    System.out.println("Employee First Name        : " + employeeFirstName);
 			    System.out.println("Birthday                   : " + birthday);
@@ -136,9 +136,27 @@ public class payrollsystem {
 			        e.printStackTrace();
 			    }
 
-			    // Prompt for month
-			    System.out.print("\nEnter the Month (MM/YYYY)  : ");
-			    String enteredMonth = scanner.nextLine();
+			 // Prompt for month
+			    String enteredMonth = null;
+			    boolean validMonth = false;
+			    while (!validMonth) {
+			        System.out.print("\nEnter the Month (MM/YYYY)  : ");
+			        enteredMonth = scanner.nextLine();
+			        if (enteredMonth.matches("^(0[1-9]|1[0-2])/2022$")) { // Validate month and year
+			            String[] monthYear = enteredMonth.split("/");
+			            int month = Integer.parseInt(monthYear[0]);
+			            if (month >= 1 && month <= 12) {
+			                validMonth = true;
+			            } else {
+			                System.out.println("\nInvalid month. Please enter a valid month (01 to 12).");
+			                // Exit the loop if the month format is invalid
+			                break;
+			            }
+			        } else {
+			            System.out.println("\nInvalid month/year format. Please enter the month in MM/YYYY format for the year 2022.");
+			        }
+			    }
+
 
 			    // Read monthly hours worked
 			    Map<String, Double> monthlyHours = new TreeMap<>(); // Using TreeMap to sort by date
@@ -198,12 +216,12 @@ public class payrollsystem {
 			    }
 
 			    // Display payroll details
-			    System.out.println("\n----------Payroll Details----------");
+			    System.out.println("\n            PAYROLL DETAILS");
 
 			    System.out.println("\nHourly Rate                : PHP " + hourlyRate);
 
 			    // Display Hours Worked for the selected month
-			    System.out.println("\n- - Hours Worked for " + enteredMonth + " - -");
+			    System.out.println("\n       Hours Worked for " + enteredMonth);
 			    double totalHoursForMonth = 0.0;
 			    for (Map.Entry<String, Double> entry : monthlyHours.entrySet()) {
 			        String date = entry.getKey();
@@ -226,6 +244,7 @@ public class payrollsystem {
 			    System.out.println("Total hours worked         : " + String.format("%.2f", totalHoursForMonth) + " hours");
 
 			    // Display Late Hours for the selected month
+			    System.out.println("\n       Late Hours for " + enteredMonth);
 			    double totalLateHoursForMonth = 0.0;
 			    for (Map.Entry<String, Double> entry : lateHours.entrySet()) {
 			        String date = entry.getKey();
@@ -245,7 +264,7 @@ public class payrollsystem {
 
 			    // Calculate Gross Pay
 			    double grossPay = totalHoursForMonth * hourlyRate;
-			    System.out.println("\n------------Gross Pay------------");
+			    System.out.println("\n            GROSS PAY");
 			    System.out.println("\nGross Pay                  : PHP " + String.format("%.2f", grossPay));
 			     
 			    // Calculate SSS Contribution
@@ -295,24 +314,23 @@ public class payrollsystem {
 			    // Calculate late deductions
 			    double lateDeductions = totalLateHoursForMonth * hourlyRate;
 			    
-			    System.out.println("\n------------Deductions------------");
+			    System.out.println("\n            DEDUCTIONS");
 			    System.out.println("\nSSS Contribution           : PHP " + String.format("%.2f", sssContribution));
 			    System.out.println("PhilHealth Contribution    : PHP " + String.format("%.2f", philHealthContribution));
 			    System.out.println("PagIBIG Contribution       : PHP " + String.format("%.2f", pagIBIGContribution));
-			    System.out.println("\nTaxable Income             : PHP " + String.format("%.2f", taxableIncome));
+			    System.out.println("Taxable Income             : PHP " + String.format("%.2f", taxableIncome));
 			    System.out.println("Withholding Tax            : PHP " + String.format("%.2f", withholdingTax));
 			    System.out.println("Late Deductions            : PHP " + String.format("%.2f", lateDeductions));
 
 			    double netPay = grossPay - sssContribution - pagIBIGContribution - philHealthContribution - withholdingTax - lateDeductions;
 
 			    // Print net pay
-			    System.out.println("\n--------------Net Pay--------------");
+			    System.out.println("\n            NET PAY");
 			    System.out.println("\nNet Pay                    : PHP " + String.format("%.2f", netPay));
 
 			}
+        }catch (NumberFormatException e) {
+            e.printStackTrace();
         }
-        catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
     }
 }
